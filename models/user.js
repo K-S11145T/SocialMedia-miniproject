@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/miniproject");
+const dotenv = require("dotenv")
+
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URI).then(() => {
+  console.log("connected");
+});
 
 const userSchema = mongoose.Schema({
   username: String,
@@ -8,7 +14,7 @@ const userSchema = mongoose.Schema({
   age: Number,
   password: String,
   email: String,
-  posts: [{ type: mongoose.Schema.Types.ObjectId , ref:"post"}],
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "post" }],
 });
 
 module.exports = mongoose.model("user", userSchema);

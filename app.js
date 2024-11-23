@@ -4,7 +4,10 @@ const postModel = require("./models/post");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv")
 const app = express();
+
+dotenv.config();
 
 app.set("view engine", "ejs");
 app.use(express.json());
