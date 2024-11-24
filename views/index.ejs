@@ -5,23 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Social Media</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: x-small; /* Reduced font size even further */
+    }
+  </style>
 </head>
 <body>
-  <div class="w-full h-screen text-white p-10 bg-zinc-900">
-    <div class="flex justify-between items-center">
-      <h3 class="text-xl mb-10">Add Account</h3>
-      <a href="/login">Login</a>
-
+  <div class="w-full h-screen text-white p-10 bg-zinc-900 flex flex-col items-center justify-center">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-bold mb-4">Join Our Community</h1> <!-- Reduced font size even further -->
+      <p class="text-lg text-zinc-400">Create an account to connect with others and share your thoughts</p> <!-- Reduced font size even further -->
     </div>
-    <form class="flex gap-5 " method="post" action="/register">
-      <input class="p-3 bg-transparent border-2 border-zinc-800 outline-none"  type="text" placeholder="name" name="name" >
-      <input class="p-3 bg-transparent border-2 border-zinc-800 outline-none"  type="text" placeholder="username" name="username" >
-      <input  class="p-3 bg-transparent border-2 border-zinc-800 outline-none" type="Number" placeholder="age" name="age" >
-      <input  class="p-3 bg-transparent border-2 border-zinc-800 outline-none" type="email" placeholder="email" name="email" >
-      <input  class="p-3 bg-transparent border-2 border-zinc-800 outline-none" type="password" placeholder="password" name="password" >
-      <input class="text-white bg-blue-500 p-4 rounded-md" type="submit" value="Create Account">
+    <form class="flex flex-col gap-5 w-full md:w-1/2" method="post" action="/register">
+      <input class="p-2 bg-transparent border-2 border-zinc-800 outline-none text-lg rounded-md"  type="text" placeholder="Name" name="name" > <!-- Reduced font size even further -->
+      <input class="p-2 bg-transparent border-2 border-zinc-800 outline-none text-lg rounded-md"  type="text" placeholder="Username" name="username" > <!-- Reduced font size even further -->
+      <input  class="p-2 bg-transparent border-2 border-zinc-800 outline-none text-lg rounded-md" type="Number" placeholder="Age" name="age" > <!-- Reduced font size even further -->
+      <input  class="p-2 bg-transparent border-2 border-zinc-800 outline-none text-lg rounded-md" type="email" placeholder="Email" name="email" > <!-- Reduced font size even further -->
+      <input  class="p-2 bg-transparent border-2 border-zinc-800 outline-none text-lg rounded-md" type="password" placeholder="Password" name="password" > <!-- Reduced font size even further -->
+      <input class="text-white bg-blue-500 p-3 rounded-md text-lg cursor-pointer" type="submit" value="Create Account"> <!-- Reduced font size even further -->
     </form>
-
+    <p class="text-lg text-zinc-400 mt-10">Already have an account? <a href="/login" class="text-blue-500">Login here</a></p> <!-- Reduced font size even further -->
   </div>
   
   
