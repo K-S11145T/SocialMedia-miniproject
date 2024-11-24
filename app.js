@@ -3,16 +3,23 @@ const userModel = require("./models/user");
 const postModel = require("./models/post");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
 const app = express();
+const path = require("path");
+const multer = require("multer");
+const upload = require("./config/multerConfig");
 
 dotenv.config();
 
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")))
 app.use(cookieParser());
+
+
 
 app.get("/", function (req, res) {
   res.render("index");
@@ -20,42 +27,53 @@ app.get("/", function (req, res) {
 app.get("/login", function (req, res) {
   res.render("login");
 });
+app.get("/profile/upload", function (req, res) {
+  res.render("profileUpload");
+});
+
+app.post("/upload",isLoggedIn ,upload.single("image"), async (req , res)=>{
+  const {email} = req.user
+  let user = await userModel.findOneAndUpdate({email} , {profilepic : req.file.filename})
+  console.log(user)
+  res.redirect("/profile")
+})
+
+
 app.get("/profile", isLoggedIn, async function (req, res) {
   const { email } = req.user;
   let user = await userModel.findOne({ email }).populate("posts");
-  res.render("profile", { user } );
+  res.render("profile", { user });
 });
 app.get("/like/:id", isLoggedIn, async function (req, res) {
-  
-  let post = await postModel.findOne({_id: req.params.id }).populate("user");
+  let post = await postModel.findOne({ _id: req.params.id }).populate("user");
 
-  if(post.likes.indexOf(req.user.id) === -1){
+  if (post.likes.indexOf(req.user.id) === -1) {
     post.likes.push(req.user.id);
-  }
-  else{
+  } else {
     post.likes.splice(post.likes.indexOf(req.user.id), 1);
   }
   await post.save();
-  res.redirect("/profile")
+  res.redirect("/profile");
 });
 app.get("/edit/:id", isLoggedIn, async function (req, res) {
-  
-  let post = await postModel.findOne({_id: req.params.id }).populate("user");
-  res.render("edit" , {post})
+  let post = await postModel.findOne({ _id: req.params.id }).populate("user");
+  res.render("edit", { post });
 });
 app.post("/update/:id", isLoggedIn, async function (req, res) {
-  await postModel.findOneAndUpdate({_id: req.params.id} , {content : req.body.content}).populate("user")
-  res.redirect("/profile")
+  await postModel
+    .findOneAndUpdate({ _id: req.params.id }, { content: req.body.content })
+    .populate("user");
+  res.redirect("/profile");
 });
 app.post("/post", isLoggedIn, async function (req, res) {
-  const {email} = req.user
+  const { email } = req.user;
   let user = await userModel.findOne({ email });
   let { content } = req.body;
-  let post = await postModel.create({user:user._id , content})
+  let post = await postModel.create({ user: user._id, content });
 
-  user.posts.push(post._id)
-  user.save()
-  
+  user.posts.push(post._id);
+  user.save();
+
   res.redirect("/profile");
 });
 

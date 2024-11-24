@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Social Media</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: x-small; /* Reduced font size even further */
+    }
+  </style>
+</head>
+<body>
+  <div class="w-full h-screen text-white p-10 bg-zinc-900 flex flex-col items-center justify-center">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-bold mb-4">Upload Profile Picture</h1> <!-- Reduced font size even further -->
+      <p class="text-lg text-zinc-400">Create an account to connect with others and share your thoughts</p> <!-- Reduced font size even further -->
+    </div>
+    <form class="flex flex-col gap-5 w-full md:w-1/2" method="post" action="/upload" enctype="multipart/form-data">
+      <input class="text-white  p-3 rounded-md text-lg cursor-pointer" type="file" name="image">
+      <input class="text-white bg-blue-500 p-3 rounded-md text-lg cursor-pointer" type="submit" value="Upload File"> <!-- Reduced font size even further -->
+    </form>
+    
+  </div>
+  
+  
+</body>
+</html>

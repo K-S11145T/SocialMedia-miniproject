@@ -11,7 +11,16 @@
 <body>
   <div class="w-full min-h-screen text-white p-10 bg-zinc-900">
     <div class="flex w-full justify-between items-center">
-      <h3 class="text-xl mb-10">Hello <%= user.name%>
+      <div class="flex gap-5 items-center w-full ">
+        <div class="flex flex-col items-center justify-center gap-2">
+
+          <div class="h-16 w-16 rounded-full overflow-hidden ">
+            <img class="w-full h-full object-cover" src="images/uploads/<%=user.profilepic%>" alt="">
+          </div>
+          <a class="text-blue-500 text-sm" href="/profile/upload"><%= user.profilepic == "default.jpg" ? "Upload" : "Change" %></a>
+        </div>
+        <h3 class="text-xl ">Hello <%= user.name%>
+      </div>
       </h3>
       <a href="/logout" class="text-white">Logout</a>
     </div>
